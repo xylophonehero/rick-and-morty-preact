@@ -5,12 +5,9 @@ import tw from "twin.macro"
 import { Button } from './Button';
 import { useQuotes } from '../context/QuotesContext';
 
-
-const Wrapper = tw.div`flex-1 bg-gray-200 flex flex-col justify-center h-full`
-
 interface ApiResponse
 {
-  data: string[]
+  quote: string
 }
 
 const Quote: FunctionalComponent = () =>
@@ -20,19 +17,19 @@ const Quote: FunctionalComponent = () =>
 
   const getQuote = async () =>
   {
-    const [data, err] = await handlePromise<ApiResponse>(fetch("https://loremricksum.com/api/?paragraphs=1&quotes=1")
+    const [data, err] = await handlePromise<ApiResponse>(fetch("/.netlify/functions/getQuote")
       .then((res) => res.json()))
     if (err)
     {
       console.error(err)
       return
     }
-    if (!data.data[0])
+    if (!data.quote)
     {
       console.error("No quote found")
       return
     }
-    setQuote(data.data[0])
+    setQuote(data.quote)
   }
 
   useEffect(() =>
