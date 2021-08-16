@@ -20,7 +20,7 @@ const Quote: FunctionalComponent = () =>
 
   const getQuote = async () =>
   {
-    const [data, err] = await handlePromise<ApiResponse>(fetch("http://loremricksum.com/api/?paragraphs=1&quotes=1")
+    const [data, err] = await handlePromise<ApiResponse>(fetch("https://loremricksum.com/api/?paragraphs=1&quotes=1")
       .then((res) => res.json()))
     if (err)
     {
